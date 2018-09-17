@@ -1,3 +1,2 @@
-/target/
-**/.pytest_cache
-**/*.json
+*/.pytest_cache
+*/*.json
