@@ -1,6 +1,4 @@
 pub fn find_saddle_points(input: &[Vec<u64>]) -> Vec<(usize, usize)> {
-    let mut output: Vec<(usize, usize)> = Vec::new();
-
     let max_values_row: Vec<u64> = input.iter()
                                     .map(|row| find_row_max(row))
                                     .collect();
@@ -8,19 +6,16 @@ pub fn find_saddle_points(input: &[Vec<u64>]) -> Vec<(usize, usize)> {
                                     .map(|column| find_column_min(input, column))
                                     .collect();
     
-    // use enumerate to make it easier to enter index if necessary
-    for (i, row) in input.iter().enumerate() {
-        for (j, element) in row.iter().enumerate() {     
-            // check if element is both the max value in the row and
-            // the min value in the column
-            // use i and j to check with respective values in precalculated vectors
-            if element == &max_values_row[i] && element == &min_values_column[j] {
-                output.push((i, j));
-            }
-        }
-    }
-
-    output
+    input.iter()
+        .enumerate()
+        .flat_map(|(i, row)| {
+            row.iter()
+                .enumerate()
+                .map(move |(j, col)| ((i, j), col))
+                .filter(|&((i, j), col)| *col == max_values_row[i] && *col == min_values_column[j])
+                .map(|((i,j), _col)| (i,j))           
+            })
+        .collect()  
 }
 
 // find the max value in a given row
