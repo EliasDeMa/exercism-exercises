@@ -1,5 +1,2 @@
-.*.swp
-*pycache*
-*pycache__/*
-robot-name/used.txt
-*.pyc
+.solution.json
+.pytest_cache/
