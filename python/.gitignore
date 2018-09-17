@@ -1,2 +1,3 @@
-**/.pytest_cache
-**/*.json
+.pytest_cache
+*.json
+__pycache__
