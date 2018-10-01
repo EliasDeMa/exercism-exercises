@@ -22,6 +22,7 @@ pub fn is_valid(code: &str) -> bool {
             replaced.push(number);
         }
     }
+
     let number = replaced.iter().fold(0, |acc, x| acc + x);
     println!("{}", number);
     number % 10 == 0
